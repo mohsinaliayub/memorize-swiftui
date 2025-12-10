@@ -9,6 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
+        HStack {
+            CardView()
+            CardView()
+            CardView()
+            CardView()
+        }
+        .padding()
+        .foregroundStyle(.orange)
+    }
+}
+
+struct CardView: View {
+    var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 12)
                 .foregroundStyle(.white)
@@ -16,8 +29,6 @@ struct ContentView: View {
                 .strokeBorder(lineWidth: 2)
             Text("👻").font(.largeTitle)
         }
-        .padding()
-        .foregroundStyle(.orange)
     }
 }
 
