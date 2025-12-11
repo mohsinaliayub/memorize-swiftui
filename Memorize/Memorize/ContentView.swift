@@ -24,7 +24,7 @@ struct ContentView: View {
 
 struct CardView: View {
     let content: String
-    var isFaceUp = false
+    @State var isFaceUp = false
     
     var body: some View {
         ZStack {
@@ -38,7 +38,7 @@ struct CardView: View {
             }
         }
         .onTapGesture {
-//            isFaceUp.toggle() // Error - Cannot assign to property: 'self' is immutable
+            isFaceUp.toggle()
         }
     }
 }
