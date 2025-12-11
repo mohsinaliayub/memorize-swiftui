@@ -37,6 +37,9 @@ struct CardView: View {
                 base.fill()
             }
         }
+        .onTapGesture {
+//            isFaceUp.toggle() // Error - Cannot assign to property: 'self' is immutable
+        }
     }
 }
 
