@@ -8,16 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let emojis = ["👻", "🎃", "🕷️", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "☠️", "🍭"]
+    private let emojis = ["👻", "🎃", "🕷️", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "😱", "☠️", "🍭"]
+    @State private var cardCount = 4
     
     var body: some View {
-        HStack {
-            ForEach(0..<4, id: \.self) { index in
-                CardView(content: emojis[index], isFaceUp: true)
+        VStack {
+            HStack {
+                ForEach(0..<cardCount, id: \.self) { index in
+                    CardView(content: emojis[index], isFaceUp: true)
+                }
+            }
+            .padding()
+            .foregroundStyle(.orange)
+            
+            HStack {
+                Button("Remove Card") {
+                    cardCount -= 1
+                }
+                
+                Button("Add Card") {
+                    cardCount += 1
+                }
             }
         }
-        .padding()
-        .foregroundStyle(.orange)
     }
 }
 
