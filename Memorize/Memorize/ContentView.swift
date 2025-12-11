@@ -12,10 +12,9 @@ struct ContentView: View {
     
     var body: some View {
         HStack {
-            CardView(content: emojis[0])
-            CardView(content: emojis[1])
-            CardView(content: emojis[2], isFaceUp: true)
-            CardView(content: emojis[3], isFaceUp: true)
+            ForEach(0..<4, id: \.self) { index in
+                CardView(content: emojis[index], isFaceUp: true)
+            }
         }
         .padding()
         .foregroundStyle(.orange)
