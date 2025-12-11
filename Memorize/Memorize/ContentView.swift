@@ -18,19 +18,19 @@ struct ContentView: View {
                     CardView(content: emojis[index], isFaceUp: true)
                 }
             }
-            .padding()
             .foregroundStyle(.orange)
             
             HStack {
                 Button("Remove Card") {
                     cardCount -= 1
                 }
-                
+                Spacer()
                 Button("Add Card") {
                     cardCount += 1
                 }
             }
         }
+        .padding()
     }
 }
 
