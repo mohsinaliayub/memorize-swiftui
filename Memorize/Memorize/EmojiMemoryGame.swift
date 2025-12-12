@@ -9,5 +9,13 @@ import Foundation
 
 class EmojiMemoryGame {
     // TODO: Finish the implementation
-    var model = MemoryGame<String>(cards: [])
+    private var model = MemoryGame<String>(cards: [])
+    
+    var cards: Array<MemoryGame<String>.Card> {
+        model.cards
+    }
+    
+    func choose(_ card: MemoryGame<String>.Card) {
+        model.choose(card)
+    }
 }
