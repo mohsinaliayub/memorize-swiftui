@@ -12,7 +12,7 @@ class EmojiMemoryGame {
     
     private static func createMemoryGame() -> MemoryGame<String> {
         MemoryGame(numberOfPairsOfCards: 4) { pairIndex in
-            emojis[pairIndex]
+            emojis.indices.contains(pairIndex) ? emojis[pairIndex] : "⁉️"
         }
     }
     
