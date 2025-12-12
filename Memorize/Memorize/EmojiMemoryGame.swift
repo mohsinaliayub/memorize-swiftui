@@ -11,7 +11,7 @@ class EmojiMemoryGame {
     private static let emojis = ["👻", "🎃", "🕷️", "😈", "💀", "🕸️", "🧙‍♀️", "🙀", "👹", "😱", "☠️", "🍭"]
     
     private static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame(numberOfPairsOfCards: 4) { pairIndex in
+        MemoryGame(numberOfPairsOfCards: 8) { pairIndex in
             emojis.indices.contains(pairIndex) ? emojis[pairIndex] : "⁉️"
         }
     }
@@ -20,6 +20,12 @@ class EmojiMemoryGame {
     
     var cards: Array<MemoryGame<String>.Card> {
         model.cards
+    }
+    
+    // MARK: - Intents
+    
+    func shuffle() {
+        model.shuffle()
     }
     
     func choose(_ card: MemoryGame<String>.Card) {
