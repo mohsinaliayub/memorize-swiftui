@@ -54,26 +54,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     // In a nutshell: you can only match a card with another card if there's only one extra face-up card.
     //                - At one time, there can be only two cards that are face-up.
     mutating func choose(_ card: Card) {
-        // 1. find the index of the chosen card from 'cards' array.
         if let chosenIndex = cards.firstIndex(of: card) {
-            // 2. If the card is already face-up or if the card is already matched, do nothing.
             if !cards[chosenIndex].isFaceUp && !cards[chosenIndex].isMatched {
-                // 3. Check if you already have another face-up card index stored in 'indexOfTheOneAndOnlyFaceUpCard'
                 if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
-                    // 4. There is another face-up card, so try to match both cards.
-                    //    a. Try to match them by their content property. If match is successful, set 'isMatched' of both cards to 'true'.
-                    //    b. Regardless of the match, store 'nil' in 'indexOfTheOneAndOnlyFaceUpCard' since we have two face-up cards now.
                     if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                         cards[chosenIndex].isMatched = true
                         cards[potentialMatchIndex].isMatched = true
                     }
                 } else {
-                    // 5. No face-up or there are two face-up cards already, so
-                    //    a. Turn all the cards face-down.
-                    //    b. store the index of the chosen card in 'indexOfTheOneAndOnlyFaceUpCard', as that is goint to be the only face-up card now.
                     indexOfTheOneAndOnlyFaceUpCard = chosenIndex
                 }
-                // 6. Turn the currently selected card to face-up.
                 cards[chosenIndex].isFaceUp = true
             }
         }
