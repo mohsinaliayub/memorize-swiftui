@@ -20,24 +20,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
-    // Stores the index of the one face-up card. It is set to 'nil' when there are two face-up cards.
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
-        get {
-            var faceUpCardIndices = [Int]()
-            for index in cards.indices {
-                if cards[index].isFaceUp {
-                    faceUpCardIndices.append(index)
-                }
-            }
-            return faceUpCardIndices.count == 1 ? faceUpCardIndices.first : nil
-        }
-        set {
-            for index in cards.indices {
-                cards[index].isFaceUp = (index == newValue)
-            }
-        }
+        get { cards.indices.filter { cards[$0].isFaceUp }.only }
+        set { cards.indices.forEach { cards[$0].isFaceUp = ($0 == newValue) } }
     }
     
+    // TODO: - Write Documentation for this method.
     // Gameplay rules: (All cards need to be face-down when the app starts)
     // 1. When player chooses a first card, you should face it up.
     // 2. When player chooses a second card, you have to make a match b/w the two face-up cards.
@@ -71,7 +59,6 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
     mutating func shuffle() {
         cards.shuffle()
-        print(cards)
     }
     
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {
@@ -83,5 +70,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         var debugDescription: String {
             "\(id): \(content) \(isFaceUp ? "up" : "down") \(isMatched ? "matched" : "")"
         }
+    }
+}
+
+
+extension Array {
+    var only: Element? {
+        count == 1 ? first : nil
     }
 }
