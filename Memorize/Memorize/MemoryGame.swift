@@ -21,7 +21,22 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
     
     // Stores the index of the one face-up card. It is set to 'nil' when there are two face-up cards.
-    var indexOfTheOneAndOnlyFaceUpCard: Int?
+    var indexOfTheOneAndOnlyFaceUpCard: Int? {
+        get {
+            var faceUpCardIndices = [Int]()
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    faceUpCardIndices.append(index)
+                }
+            }
+            return faceUpCardIndices.count == 1 ? faceUpCardIndices.first : nil
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
     
     // Gameplay rules: (All cards need to be face-down when the app starts)
     // 1. When player chooses a first card, you should face it up.
@@ -52,14 +67,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                         cards[chosenIndex].isMatched = true
                         cards[potentialMatchIndex].isMatched = true
                     }
-                    indexOfTheOneAndOnlyFaceUpCard = nil
                 } else {
                     // 5. No face-up or there are two face-up cards already, so
                     //    a. Turn all the cards face-down.
                     //    b. store the index of the chosen card in 'indexOfTheOneAndOnlyFaceUpCard', as that is goint to be the only face-up card now.
-                    for index in cards.indices {
-                        cards[index].isFaceUp = false
-                    }
                     indexOfTheOneAndOnlyFaceUpCard = chosenIndex
                 }
                 // 6. Turn the currently selected card to face-up.
